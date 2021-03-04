@@ -1,6 +1,6 @@
 class Api::V1::MealsController < ApplicationController
   before_action :set_meal, only: [:show, :update, :destroy]
-  skip_before_action :authorized, only: [:create, :index]
+  skip_before_action :authorized, only: [:create, :index, :show]
 
 
   # GET /meals
@@ -48,6 +48,6 @@ class Api::V1::MealsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def meal_params
-      params.require(:meal).permit(:name, :category, :description, :vegan, :contains_dairy, :contains_nuts, :image)
+      params.require(:meal).permit(:name, :category, :description, :vegan, :contains_dairy, :contains_nuts, :image, :user_id)
     end
 end
