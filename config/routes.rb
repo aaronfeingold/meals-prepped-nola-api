@@ -9,8 +9,10 @@ Rails.application.routes.draw do
         resources :meals
       end
 
-      post '/login', to: 'auth#create'
-      get '/current_user', to: 'auth#show'
+      post '/login', to: 'sessions#create'
+      post '/logout', to: 'sessions#destroy'
+      get '/logged_in', to: 'sessions#is_logged_in?'
+      get '/current_user', to: 'sessions#show'
       post '/sign_up', to: 'users#create'
     end 
   end

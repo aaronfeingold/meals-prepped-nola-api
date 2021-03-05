@@ -1,8 +1,6 @@
 class Api::V1::MealsController < ApplicationController
   before_action :set_meal, only: [:show, :update, :destroy]
-  skip_before_action :authorized, only: [:create, :index, :show]
-
-
+  
   # GET /meals
   def index
     @meals = Meal.all
@@ -17,6 +15,10 @@ class Api::V1::MealsController < ApplicationController
 
   # POST /meals
   def create
+    if (meal_params[:user_id])
+      @user = User.find_by_id(meal_params[:user_id])
+    end
+
     @meal = Meal.new(meal_params)
 
     if @meal.save
